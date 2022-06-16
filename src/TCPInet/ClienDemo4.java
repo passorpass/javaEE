@@ -1,0 +1,29 @@
+package TCPInet;
+
+import java.io.*;
+import java.net.Socket;
+
+public class ClienDemo4 {
+    public static void main(String[] args) throws IOException {
+
+        Socket s = new Socket("192.168.10.1", 1269);
+
+      //封装文本文件的内容
+        BufferedReader br = new BufferedReader(new FileReader("E:\\Sockettest1.txt"));
+        //封装输出流写数据
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
+
+        String line;
+        while ((line=br.readLine())!=null){
+            bw.write(line);
+            bw.newLine();
+            bw.flush();
+        }
+        br.close();;
+        s.close();
+
+
+
+    }
+}
+
